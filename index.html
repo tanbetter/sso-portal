@@ -11,8 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="http://10.0.6.241/web-portal-intra/favicon.ico">
     <link rel="stylesheet" href="/assets/styles.css">
-    <link href="/assets/css.css" rel="stylesheet">
+    <!-- <link href="/assets/css.css" rel="stylesheet"> -->
     <script src="http://localhost:8080/auth/js/keycloak.js"></script>
+    <script src="/assets/jquery.min.js"></script>
     <script src="myLogic.js"></script>
     <style>
         .fade {
@@ -25,6 +26,7 @@
             font: 11pt PromptRegular
         }
 
+        /* 
         body {
             background: #ffffff;
             font-size: 14pt;
@@ -32,7 +34,7 @@
             margin: 0;
             padding: 0;
             color: #000
-        }
+        } */
 
         html {
             min-height: 100%;
@@ -64,11 +66,19 @@
 
         html,
         body {
-            height: 100%
-        }
-
-        body {
-            margin: 0
+            height: 100%;
+            margin: 0;
+            font-family: var(--bs-body-font-family);
+            font-size: var(--bs-body-font-size);
+            font-weight: var(--bs-body-font-weight);
+            line-height: var(--bs-body-line-height);
+            color: var(--bs-body-color);
+            text-align: var(--bs-body-text-align);
+            background-color: var(--bs-body-bg);
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            background: #eceef1;
+            color: #333a45
         }
 
         :root {
@@ -124,7 +134,7 @@
             --bs-body-line-height: 1.5;
             --bs-body-color: #212529;
             --bs-body-bg: #fff;
-            --bs-border-width: 1px;
+            --bs-border-width: 0px !important;
             --bs-border-style: solid;
             --bs-border-color: #dee2e6;
             --bs-border-color-translucent: rgba(0, 0, 0, .175);
@@ -152,18 +162,6 @@
             }
         }
 
-        body {
-            margin: 0;
-            font-family: var(--bs-body-font-family);
-            font-size: var(--bs-body-font-size);
-            font-weight: var(--bs-body-font-weight);
-            line-height: var(--bs-body-line-height);
-            color: var(--bs-body-color);
-            text-align: var(--bs-body-text-align);
-            background-color: var(--bs-body-bg);
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent
-        }
 
         .main-content {
             width: 100%;
@@ -514,10 +512,6 @@
             box-sizing: border-box
         }
 
-        body {
-            background: #eceef1;
-            color: #333a45
-        }
 
         .wrapper {
             margin: 2em auto;
@@ -561,6 +555,36 @@
             .card {
                 width: 100%
             }
+        }
+
+        .card {
+            --bs-card-spacer-y: 1rem;
+            --bs-card-spacer-x: 1rem;
+            --bs-card-title-spacer-y: .5rem;
+            --bs-card-border-width: 0px !important;
+            --bs-card-border-color: var(--bs-border-color-translucent);
+            --bs-card-border-radius: .375rem;
+            --bs-card-box-shadow: ;
+            --bs-card-inner-border-radius: calc(.375rem - 1px);
+            --bs-card-cap-padding-y: .5rem;
+            --bs-card-cap-padding-x: 1rem;
+            --bs-card-cap-bg: rgba(0, 0, 0, .03);
+            --bs-card-cap-color: ;
+            --bs-card-height: ;
+            --bs-card-color: ;
+            --bs-card-bg: #fff;
+            --bs-card-img-overlay-padding: 1rem;
+            --bs-card-group-margin: .75rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            height: var(--bs-card-height);
+            word-wrap: break-word;
+            background-color: var(--bs-card-bg);
+            background-clip: border-box;
+            border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+            border-radius: var(--bs-card-border-radius)
         }
 
         .card:hover .card__inner {
@@ -614,25 +638,7 @@
                                 style="width: 100%; height: 80px;">
                         </div>
                     </a>
-                    <div id="toggler-Noti" class="navbar-toggler" style="padding: 0; border: none;">
-                        <a class="mat-focus-indicator mat-menu-trigger mat-button mat-button-base" aria-disabled="false"
-                            aria-haspopup="menu">
-                            <span class="mat-button-wrapper">
-                                <i class="ace-icon fas fa-bullhorn icon-animated-vertical"
-                                    style="font-size: 30px; color: #2f579c; line-height: 60px; width: 5px;">
-                                </i>
-                                <span class="badge badge-important" style="top: -23px; left: 20px; position: relative;">
-                                    <span>1</span>
-                                </span>
-                            </span>
-                            <span class="mat-ripple mat-button-ripple">
-                            </span>
-                            </span>
-                            <span class="mat-button-focus-overlay">
 
-                            </span>
-                        </a>
-                    </div>
                     <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                         class="navbar-toggler">
@@ -647,24 +653,27 @@
                                         <div class="logins"></div>
                                     </li>
                                     <li class="nav-item">
-                                        <div class="logins"><img src="assets/icon_profile.svg"
-                                                style="height: 36px; width: 36px; border-radius: 50%;"><a
-                                                class="mat-focus-indicator mat-menu-trigger mat-button mat-button-base"
-                                                aria-disabled="false" aria-haspopup="menu"><span
-                                                    class="mat-button-wrapper"><span class="flex-column"
-                                                        style="padding-left: 7px; padding-top: 22px;"><span
-                                                            style="color: #2f579c;"
+                                        <div class="logins">
+                                            <img src="assets/icon_profile.svg"
+                                                style="height: 36px; width: 36px; border-radius: 50%;">
+                                            <a class="" aria-disabled="false" aria-haspopup="menu">
+                                                <span class="">
+                                                    <span class="flex-column"
+                                                        style="padding-left: 7px; padding-top: 22px;">
+                                                        <span style="color: #2f579c;"
                                                             class="">เจ้าหน้าที่สำนักงานประกันสังคม
                                                         </span>
                                                         <hr style="margin: -7px; border: 1px solid #2f579c;">
-                                                       
-                                                        <span class="btn"> 
-                                                            <button type="button"  class="btn btn-sm"  onclick="logout()">ออกจากระบบ</button>
-                                                        </span>
-                                                        <i class="ace-icon fa fa-caret-down"></i>
+                                                        <!-- <i class="ace-icon fa fa-caret-down"></i> -->
                                                     </span>
-                                                </span><span class="mat-ripple mat-button-ripple"></span>
-                                                <span class="mat-button-focus-overlay"></span></a>
+                                                </span>
+                                                <span>
+                                                    <button type="button" class="btn btn-sm" style="margin-top: 10px;"
+                                                        onclick="logout()">ออกจากระบบ</button>
+                                                </span>
+                                                <!-- <span class="mat-ripple mat-button-ripple"></span> -->
+                                                <!-- <span class="mat-button-focus-overlay"></span> -->
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
@@ -685,131 +694,74 @@
                             <div
                                 style="text-align: center; padding-top: 40px; margin-bottom: -20px; font-weight: bold; font-size: 36px; color: #353073;">
                                 Digital All Service </div>
+                            <!-- <button onclick="access_token(1)">access</button> -->
                             <div class="wrapper" style="min-height: 525px;">
                                 <div class="cards">
                                     <div class="card">
-                                        <a>
+                                        <a onclick="access_token(1)">
                                             <div class="card__inner">
-                                                <i class="fa-user-lock fas">
-                                                </i>
-                                                <span>Service
-                                                    Management</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    จัดการสิทธิ </div>
+                                                <div class="">
+                                                    <img src="/assets/mobile-app.png" alt="Mobile App Backend"
+                                                        srcset="/assets/mobile-app.png">
+                                                </div>
+                                                <span>Mobile App Backend</span>
+                                                <!-- <div style="font-size: 10px; color: rgb(60, 60, 60);">
+                                                    Mobile App Backend </div> -->
                                             </div>
                                         </a>
                                     </div>
                                     <div class="card">
-                                        <a>
+                                        <a onclick="access_token(2)">
                                             <div class="card__inner">
-                                                <i class="fa-laptop-code fas"></i>
-                                                <span>Content
-                                                    Management
-                                                    System</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ระบบบริหารจัดการเนื้อหาเว็บไซต์ </div>
+                                                <div class="">
+                                                    <img src="/assets/help-desk.png" alt="Helpdesk"
+                                                        srcset="/assets/help-desk.png">
+                                                </div>
+                                                <span>Helpdesk</span>
+                                                <!-- <div style="font-size: 14px; color: rgb(60, 60, 60);">
+                                                    ระบบบริหารจัดการเนื้อหาเว็บไซต์ </div> -->
                                             </div>
                                         </a>
                                     </div>
                                     <div class="card">
-                                        <a>
+                                        <a onclick="access_token(3)">
                                             <div class="card__inner">
-                                                <i class="fa-hospital-alt fas"></i>
-                                                <span>Hospital</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    สถานพยาบาล </div>
+                                                <div class="">
+                                                    <img src="/assets/chatbot.png" alt="Chatbot"
+                                                        srcset="/assets/chatbot.png">
+                                                </div>
+                                                <span>Chat Bot</span>
+                                                <!-- <div style="font-size: 14px; color: rgb(60, 60, 60);">
+                                                    สถานพยาบาล </div> -->
                                             </div>
                                         </a>
                                     </div>
                                     <div class="card">
-                                        <a>
+                                        <a onclick="access_token(4)">
                                             <div class="card__inner">
-                                                <i class="fa-accessible-icon fab">
-                                                </i>
-                                                <span>Rehabilitation</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ศูนย์ฟื้นฟูสมรรถภาพคนงาน </div>
+                                                <div class="">
+                                                    <img src="/assets/user.png" alt="KYC" srcset="/assets/user.png">
+                                                </div>
+                                                <span>KYC</span>
+                                                <!-- <div style="font-size: 14px; color: rgb(60, 60, 60);">
+                                                    ศูนย์ฟื้นฟูสมรรถภาพคนงาน </div> -->
                                             </div>
                                         </a>
                                     </div>
                                     <div class="card">
-                                        <a>
+                                        <a onclick="access_token(5)">
                                             <div class="card__inner">
-                                                <i class="fa-file-invoice-dollar fas"></i>
-                                                <span>MEDICAL
-                                                    EXPENSES</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ระบบหารือค่ารักษาพยาบาล </div>
+                                                <div class="">
+                                                    <img src="/assets/tablet.png" alt="Tableau"
+                                                        srcset="/assets/tablet.png">
+                                                </div>
+                                                <span>Tableau</span>
+                                                <!-- <div style="font-size: 14px; color: rgb(60, 60, 60);">
+                                                    ระบบหารือค่ารักษาพยาบาล </div> -->
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner">
-                                                <i class="fa-bullhorn fas"></i>
-                                                <span>INFORMATION</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ประกาศแจ้งเตือน </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner"><i class="IntenEditor"></i><span>Intent
-                                                    Editor</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ระบบจัดการ Chatbot </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner">
-                                                <i class="null"></i><span>Card
-                                                    Template</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);"> Card
-                                                    Template </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner">
-                                                <i class="fa-user-injured fas"></i>
-                                                <span>ECOMPENSATE</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    แจ้งประสบอันตรายเนื่องจากการทำงาน </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner">
-                                                <i class="fa-gavel fas"></i>
-                                                <span>COMMITEE</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    คณะกรรมการ </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner">
-                                                <i class="fa-chart-bar fas"></i><span>Business
-                                                    Intelligence</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    ระบบธุรกิจอัจฉริยะ </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card">
-                                        <a>
-                                            <div class="card__inner"><i></i><span>Announcement</span>
-                                                <div style="font-size: 14px; color: rgb(60, 60, 60);">
-                                                    การจัดการประกาศ </div>
-                                            </div>
-                                        </a>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -820,7 +772,7 @@
             <div class="footer-content">
                 <div class="container-fluid">
                     <div style="padding: 30px 50px; text-align: left; width: 100%;">
-                        <div><span> WCF Platform V.1.0.0.0 <i class="far fa-copyright"></i> Copyright 2022
+                        <div><span> SSO Portal Copyright 2023
                                 Social Security Office. All Rights Reserved </span></div>
                         <div class="text_footer1">สำนักงานประกันสังคม</div>
                         <div class="text_footer2"> เลขที่ 88/28 หมู่ 4 ถนนติวานนท์
@@ -837,14 +789,10 @@
     </div>
 
 
-    <!-- <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/jquery.min.js"></script>
     <script src="/assets/bootstrap.min.js"></script>
-    <script src="/assets/moment.js"></script>
     <script src="/assets/bootstrap.js"></script>
-    <script src="/assets/owl.carousel.js"></script>
-    <script data-authen-url="/authentication" data-api-url="/wcf-chatbot/data-adaptor" src="assets/api.js"></script> -->
-    <!-- <script src="assets/chatbot.js" data-base-url="/wcf-chatbot/wcf-chatbox" data-audio-enabled="true"></script> -->
-
+    <script src="assets/api.js"></script>
 
 </body>
 
