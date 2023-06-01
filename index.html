@@ -634,8 +634,8 @@
                 <div class="container-fluid">
                     <a class="navbar-brand">
                         <div style="max-width: 100%; max-height: 100%;">
-                            <img src="assets/logo01.svg" alt="sso logo" class="navbar-brand"
-                                style="width: 100%; height: 80px;">
+                            <img src="assets//SSO-PORTAL.png" alt="sso logo" class="navbar-brand"
+                                style="width: 100%; height: 120px;">
                         </div>
                     </a>
 
@@ -772,7 +772,7 @@
             <div class="footer-content">
                 <div class="container-fluid">
                     <div style="padding: 30px 50px; text-align: left; width: 100%;">
-                        <div><span> SSO Portal Copyright 2023
+                        <div><span> SSO Portal <span id="copyrightYear"></span>
                                 Social Security Office. All Rights Reserved </span></div>
                         <div class="text_footer1">สำนักงานประกันสังคม</div>
                         <div class="text_footer2"> เลขที่ 88/28 หมู่ 4 ถนนติวานนท์
@@ -788,7 +788,11 @@
         </div>
     </div>
 
-
+    <script>
+        // let date = new Date();
+        const copyrightFooter = `Copyright © ${new Date().getFullYear()}`;
+        document.getElementById('copyrightYear').innerHTML = copyrightFooter;
+    </script>
     <script src="/assets/jquery.min.js"></script>
     <script src="/assets/bootstrap.min.js"></script>
     <script src="/assets/bootstrap.js"></script>
