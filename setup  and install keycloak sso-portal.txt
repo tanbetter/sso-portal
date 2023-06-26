@@ -1,0 +1,23 @@
+Install keycloak
+
+docker network create keycloak-network  #create network in docker
+docker run --name mysql -d --net keycloak-network -p 3306:3306 -e MYSQL_DATABASE=keycloak -e MYSQL_USER=keycloak -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=root_password mysql สร้าง mysql
+docker run --name keycloak -p 8080:8080 --net keycloak-network -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin keycloak-portal 
+
+ไฟล์ realm-export.json
+1 login keycloak ก่อน 
+2. เลือก menu import 
+3.select file realm-export.json
+4.If a resource exists: เลือก skip เมื่อเพิ่มเสร็จ ให้ไปดู clients ว่ามี sso-portal มาไหม 
+	ถ้ามี ไปดู user-federation ว่าให้เพิ่ม ldap ใหม่ไหม
+		ถ้าไม่มีให้ทำต่อด้านล่าง
+
+ไฟล์ databases
+keycloak.sql
+1. คัดลอก keycloak.sql ไป ยัง   container mysql:/tmp/keycloak.sql
+2.docker exec -it mysql bash
+3.mysql -u root -p 
+ password root_password
+4. drop database if exists keycloak;
+5. source /tmp/keycloak.sql
+6. restart keycloak

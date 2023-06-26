@@ -1,5 +1,9 @@
 var keycloak = new Keycloak();
+const secretkey = "faa5cb541e047c179f3f3ac24f9df65d";
+var base_url_dev = "http://localhost:8000/api";
+// const base_url_dev = "http://3.0.104.107:801/api";
 
+const base_url_redirect = "https://sso-landingpage.ingress-cdp-ry04.sso.go.th";
 function initKeycloak() {
   keycloak
     .init({ onLoad: "login-required" })
@@ -15,20 +19,18 @@ function initKeycloak() {
     });
 }
 
-var refreshToken = function () {
+const refreshToken = function () {
   keycloak.updateToken(-1).then(function () {
     document.getElementById("ta-token").value = keycloak.token;
     document.getElementById("ta-refreshToken").value = keycloak.refreshToken;
   });
 };
 
-var logout = function () {
-  keycloak.logout({ redirectUri: "http://localhost:5500" });
+const logout = function () {
+  keycloak.logout({ redirectUri: base_url_redirect });
 };
 // ===================================================================
 
-var secretkey = "faa5cb541e047c179f3f3ac24f9df65d";
-var base_url = "http://localhost:8000/api";
 function access_token(app) {
   var urlencoded = new URLSearchParams();
   urlencoded.append("secret", secretkey);
@@ -37,10 +39,11 @@ function access_token(app) {
     body: urlencoded,
     redirect: "follow",
   };
-  fetch(base_url + "/get-token", requestOptions)
+  fetch(base_url_dev + "/get-token", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       var token = result.data;
+      console.log(token.access_token);
       get_menu(token.access_token, app);
     })
     .catch((error) => console.log("error", error));
@@ -52,7 +55,7 @@ function get_menu(token, app) {
   form.append("application", app);
 
   var settings = {
-    url: "http://localhost:8000/api/get_menu",
+    url: base_url_dev + "/get_menu",
     method: "POST",
     timeout: 0,
     headers: {
@@ -99,7 +102,7 @@ function acccess_token_bypass(permission, link) {
     body: urlencoded,
     redirect: "follow",
   };
-  fetch(base_url + "/get-token", requestOptions)
+  fetch(base_url_dev + "/get-token", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       var token = result.data;
@@ -110,11 +113,11 @@ function acccess_token_bypass(permission, link) {
 }
 
 function get_data_bypass(access_token, token_bypass, link) {
-  console.log(token_bypass);
+  // console.log(token_bypass);
   var form = new FormData();
   form.append("bypass", token_bypass);
   var settings = {
-    url: "http://localhost:8000/api/token_bypass",
+    url: base_url_dev + "/token_bypass",
     method: "POST",
     timeout: 0,
     headers: {
@@ -132,6 +135,6 @@ function get_data_bypass(access_token, token_bypass, link) {
   };
 
   $.ajax(settings).done(function (response) {
-    console.log(response);
+    // console.log(response);
   });
 }

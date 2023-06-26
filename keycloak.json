@@ -1,8 +1,8 @@
 {
   "realm": "master",
-  "auth-server-url": "http://localhost:8080/auth/",
+  "auth-server-url": "http://keycloak.portal:8080/auth/",
   "ssl-required": "external",
-  "resource": "demo-api",
+  "resource": "sso-portal",
   "public-client": true,
   "confidential-port": 0
 }
